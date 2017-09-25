@@ -155,5 +155,4 @@ public class AsyncToken extends TimerTask implements ResponseMessageFuture {
 
         return true;
     }
-
 }
