@@ -18,12 +18,22 @@ public interface Channel {
     long getDefaultTimeToLive();
     void setDefaultTimeToLive(long defaultTimeToLive);
 
+    /**
+     * Start the channel. This is where the channel can initialize its internal resources, thread pools...
+     * @return true if the channel has correctly started
+     */
     boolean start();
     boolean isStarted();
     boolean stop();
 
     boolean isAuthenticated();
 
+    /**
+     * Send a message on this channel
+     * @param request message to send
+     * @param listeners array of listeners to notify asynchronously when the response is received
+     * @return future that will be triggered when the response is received
+     */
     ResponseMessageFuture send(RequestMessage request, ResponseListener... listeners);
     ResponseMessageFuture logout(ResponseListener... listeners);
     ResponseMessageFuture logout(boolean sendLogout, ResponseListener... listeners);
@@ -35,6 +45,4 @@ public interface Channel {
     void onCancelled(TransportMessage message);
     public void preconnect() throws ChannelException;
     public TransportMessage createConnectMessage(String id, boolean reconnect);
-
-
 }
